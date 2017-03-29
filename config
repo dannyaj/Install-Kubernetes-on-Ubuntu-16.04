@@ -1,0 +1,26 @@
+CA_DIR=kubernetes
+
+HOSTNAME=$(hostname)
+MY_INTERFACE=ens3
+MY_IP=$(ifconfig ${MY_INTERFACE} | grep 'inet addr' | cut -d: -f2 | awk '{print $1}')
+
+MASTER_LB_IP=10.1.5.148
+
+MASTER_1_IP=10.1.5.154
+MASTER_2_IP=10.1.5.155
+
+# OpenStack ADVERTISE_IP = Floating IP
+# Normal ADVERTISE_IP = MY_IP
+ADVERTISE_IP=$MASTER_1_IP
+
+# OpenStack NODE_IP = Floating IP
+# Normal NODE_IP = MY_IP
+# NODE_IP=10.10.1.158
+
+ETCD_1_NAME=production-cluster2-master-1
+ETCD_2_NAME=production-cluster2-master-2
+ETCD_1_IP=${MASTER_1_IP}
+ETCD_2_IP=${MASTER_2_IP}
+
+FLANNEL_NET=172.17.0.0/16
+SERVICE_CLUSTER_IP_RANGE=172.16.0.0/16
